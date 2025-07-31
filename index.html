@@ -143,17 +143,18 @@
                 try {
                     const response = await fetch(scriptURL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(payload),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
                     });
                     
-                    const responseText = await response.text();
-                    
                     if (response.ok) {
-                        if (responseText.toLowerCase().includes('lỗi') || responseText.toLowerCase().includes('error') || responseText.includes("Không tìm thấy") || responseText.includes("không hợp lệ")) {
-                             setConfirmationError(`Lỗi từ hệ thống: ${responseText}`);
-                        } else {
+                        const result = await response.json();
+                        if (result.status === 'success') {
                             setConfirmationSubmitted(true);
+                        } else {
+                            setConfirmationError(`Lỗi từ hệ thống: ${result.message || 'Không có thông báo cụ thể.'}`);
                         }
                     } else {
                         setConfirmationError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status})`);
@@ -178,17 +179,18 @@
                 try {
                      const response = await fetch(scriptURL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(payload),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
                     });
 
-                    const responseText = await response.text();
-
                     if (response.ok) {
-                         if (responseText.toLowerCase().includes('lỗi') || responseText.toLowerCase().includes('error') || responseText.includes("Không tìm thấy") || responseText.includes("không hợp lệ")) {
-                             setWishError(`Lỗi từ hệ thống: ${responseText}`);
-                        } else {
+                        const result = await response.json();
+                        if (result.status === 'success') {
                             setWishSubmitted(true);
+                        } else {
+                            setWishError(`Lỗi từ hệ thống: ${result.message || 'Không có thông báo cụ thể.'}`);
                         }
                     } else {
                         setWishError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status})`);
