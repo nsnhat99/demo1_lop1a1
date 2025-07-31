@@ -129,7 +129,9 @@
             const [wishSubmitted, setWishSubmitted] = useState(false);
             const [wishError, setWishError] = useState('');
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyuA9bYSGPQWmTbdP8Ded4WkRkbOO-a53fztoWv9TLff_uuJok7YpWPn_H47L0Mpmfn-g/exec';
+            // QUAN TRỌNG: Dán URL ứng dụng web MỚI của bạn từ Google Apps Script vào đây.
+            // URL phải được lấy sau khi bạn nhấn "Triển khai" > "Lần triển khai mới".
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwq51LK3u4XIF78lkNKvm-9E-4f_klhOtAr9hbSy3Wkqm-48RDp5CWBHNyEigpBcTMWDA/exec';
 
             const handleConfirmationSubmit = async (e) => {
                 e.preventDefault();
@@ -146,7 +148,8 @@
                         body: JSON.stringify(payload),
                         headers: {
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        mode: 'cors' // Ensure CORS mode is set
                     });
                     
                     if (response.ok) {
@@ -157,7 +160,8 @@
                             setConfirmationError(`Lỗi từ hệ thống: ${result.message || 'Không có thông báo cụ thể.'}`);
                         }
                     } else {
-                        setConfirmationError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status})`);
+                         const errorText = await response.text();
+                        setConfirmationError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status}). Phản hồi: ${errorText}`);
                     }
                 } catch (error) {
                     console.error('Confirmation Submission Error:', error);
@@ -182,7 +186,8 @@
                         body: JSON.stringify(payload),
                         headers: {
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        mode: 'cors' // Ensure CORS mode is set
                     });
 
                     if (response.ok) {
@@ -193,7 +198,8 @@
                             setWishError(`Lỗi từ hệ thống: ${result.message || 'Không có thông báo cụ thể.'}`);
                         }
                     } else {
-                        setWishError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status})`);
+                        const errorText = await response.text();
+                        setWishError(`Có lỗi xảy ra khi gửi. (Mã lỗi: ${response.status}). Phản hồi: ${errorText}`);
                     }
                 } catch (error) {
                     console.error('Wish Submission Error:', error);
