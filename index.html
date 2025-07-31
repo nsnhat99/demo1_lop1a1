@@ -100,16 +100,17 @@
 
         const App = () => {
             // URLs for the invitation images.
-            const invitationImageUrl1 = 'https://i.postimg.cc/X74PMhp9/1.jpg';
-            const invitationImageUrl2 = 'https://i.postimg.cc/pXC6PZF4/2.jpg';
-            const invitationImageUrl3 = 'https://i.postimg.cc/pL04JZVz/3.jpg';
-            const invitationImageUrl4 = 'https://i.postimg.cc/g0n5SZr5/4.jpg';
+            const invitationImageUrl1 = 'https://i.postimg.cc/02GZ6GLm/1.png';
+            const invitationImageUrl2 = 'https://i.postimg.cc/WzgDb5qD/1A3-1.gif';
+            const invitationImageUrl3 = 'https://i.postimg.cc/G38G5Qtn/3.jpg';
+            const invitationImageUrl4 = 'https://i.postimg.cc/fkQw2ZLy/4.jpg';
             const invitationImageUrl5 = 'https://i.postimg.cc/xT3WcQWs/5.jpg';
             const invitationImageUrl6 = 'https://i.postimg.cc/y862R5K7/6.jpg';
-            const invitationImageUrl7 = 'https://i.postimg.cc/wBZrSjmB/7.jpg';
-            const invitationImageUrl9 = 'https://i.postimg.cc/4yTSx2wk/9.jpg';
-            const invitationImageUrl10 = 'https://i.postimg.cc/4ybF7vFK/10.jpg';
-            const invitationImageUrl11 = 'https://i.postimg.cc/DfqNMFy2/11.jpg';
+            const invitationImageUrl7 = 'https://i.postimg.cc/d0Q0DKXP/7.png';
+            const invitationImageUrl8 = 'https://i.postimg.cc/fbyvgGkj/8.png';
+            const invitationImageUrl9 = 'https://i.postimg.cc/wBrkKwmK/9.png';
+            const invitationImageUrl10 = 'https://i.postimg.cc/k4tv7WQ2/10.png';
+            const invitationImageUrl11 = 'https://i.postimg.cc/WzL6zt8X/11.png';
 
             // Google Maps embed URL.
             const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.116601956501!2d105.77663947510714!3d21.08412088058514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aa0e408a38a7%3A0xd008a650630d740!2zVHLGsOG7nW5nIFRp4buDdSBo4buNYyDEkMO0bmcgTmfhuqFjIEE!5e0!3m2!1sen!2sus!4v1719460515152!5m2!1sen!2sus';
@@ -128,7 +129,7 @@
             const [wishSubmitted, setWishSubmitted] = useState(false);
             const [wishError, setWishError] = useState('');
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwPDrUflqSufqowuydc2thKeGBhb3F0CjqFLZPoD_JAOlPneFwVq6iRwn82WW-f8zSBIQ/exec';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyuA9bYSGPQWmTbdP8Ded4WkRkbOO-a53fztoWv9TLff_uuJok7YpWPn_H47L0Mpmfn-g/exec';
 
             const handleConfirmationSubmit = async (e) => {
                 e.preventDefault();
@@ -177,7 +178,7 @@
                 try {
                      const response = await fetch(scriptURL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                         body: JSON.stringify(payload)
                     });
 
@@ -220,8 +221,10 @@
                         </PageWrapper>
 
                         <ImagePage src={invitationImageUrl6} alt="Thiệp mời - Phần 6" />
-                        <ImagePage src={invitationImageUrl7} alt="Thiệp mời - Phần 7" />
-
+                        
+                        {/* Pre-form call to action */}
+                        <ImagePage src={invitationImageUrl7} alt="Thiệp mời - Phần 7 - Lưu ý" />
+                        
                         {/* Form Section */}
                         <section className="w-full flex items-center justify-center animated-bg relative overflow-hidden py-16 px-4">
                             <ul className="floating-shapes"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
@@ -235,6 +238,7 @@
                                             </svg>
                                             <h3 className="mt-2 text-lg font-bold text-green-800">Cảm ơn bạn đã xác nhận!</h3>
                                             <p className="mt-1 text-sm text-green-700">Chúng tôi đã nhận được thông tin của bạn.</p>
+
                                         </div>
                                     ) : (
                                         <form onSubmit={handleConfirmationSubmit} className="space-y-6">
@@ -297,10 +301,12 @@
                             </div>
                         </section>
 
+                        <ImagePage src={invitationImageUrl8} alt="Thiệp mời - Phần 8 - Giới thiệu biểu mẫu" />
+
                         {/* Closing Pages */}
+                        <ImagePage src={invitationImageUrl9} alt="Thiệp mời - Phần 9 - Trân trọng cảm ơn" />
                         <ImagePage src={invitationImageUrl10} alt="Thiệp mời - Phần 10 - Mã QR Zalo" />
                         <ImagePage src={invitationImageUrl11} alt="Thiệp mời - Phần 11 - Hẹn gặp bạn" />
-                        <ImagePage src={invitationImageUrl9} alt="Thiệp mời - Phần 9 - Trân trọng cảm ơn" />
 
                     </main>
                 </div>
